@@ -1,0 +1,200 @@
+---
+title: "Dashboard - Energia - Salvador/BA"
+author: "William Sacramento"
+runtime: shiny
+output:
+  flexdashboard::flex_dashboard:
+    orientation: columns
+    theme: spacelab
+    logo: logo.png
+    social: menu
+    source_code: embed
+    navbar:
+    - title: Meu Linkedin
+      href: https://linkedin.com/in/william-sacramento-a9605a219
+
+---
+
+```{r setup, include=FALSE}
+library(rbokeh)
+library(flexdashboard)
+library(readxl)
+library(readr)
+
+dados <- read_xlsx("data/energia.xlsx")
+dados1 <- read_xlsx("data/EnergiaCT.xlsx")
+dados2 <- read_xlsx("data/EnergiaCT2.xlsx")
+
+```
+
+# Visualização 1 {data-icon="fa-signal" data-navmenu="Análises"}
+
+## Column {.sidebar}
+
+Este Dashboard tem como intuito, apresentar alguns dados referentes ao tema de Energia e Painéis solares da cidade de Salvador e do estado da Bahia, utilizando a aplicação Rflexdashboard com o RShiny. <p>
+
+Feito por William Cardoso Sacramento <p>
+Graduando em Engenharia Química pela Universidade Federal da Bahia <p>
+
+**Fonte dos dados**: Empresa de Pesquisa Energética (EPE) e ANEEL
+
+## Column {data-width=500}
+
+### Gráfico de Consumo de energia no estado
+
+```{r}
+library(ggplot2)
+library(babynames)
+library(dplyr)
+library(plotly)
+
+
+renderPlotly(
+  ggplot(dados, aes(x = Ano, y = Consumo_total))+
+    geom_line(color = 'green')+
+    geom_point()+
+    ylab('Consumo (GWh)')
+)
+
+```
+
+### Gráfico do percentual do consumo
+```{r}
+library(ggplot2)
+library(babynames)
+library(dplyr)
+library(plotly)
+
+dados_n <- dados[-1,]
+dados_n$Ano <- as.character(dados_n$Ano)
+
+renderPlotly(
+  ggplot(dados_n, aes(x = Ano, y = Perc_consumo))+
+    geom_bar(stat = 'identity', fill = 'yellow', color = 'black')+
+    ylab('Percentual de consumo')
+)
+
+```
+
+## Column {data-width=500}
+
+### Gráfico de consumidores do estado
+
+```{r}
+library(ggplot2)
+library(babynames)
+library(dplyr)
+library(plotly)
+
+renderPlotly(
+  ggplot(dados, aes(x = Ano, y = Consumidores_total))+
+    geom_line(color = 'green')+
+    geom_point()+
+    ylab('Consumidores (milhares)')
+)
+
+```
+
+
+### Gráfico do percentual de consumidores
+```{r}
+library(ggplot2)
+library(babynames)
+library(dplyr)
+library(plotly)
+
+
+dados_n <- dados[-1,]
+dados_n$Ano <- as.character(dados_n$Ano)
+
+renderPlotly(
+  ggplot(dados_n, aes(x = Ano, y = Perc_consumidores))+
+    geom_bar(stat = 'identity', fill = 'yellow', color = 'black')+
+    ylab('Percentual de consumidores')
+)
+```
+
+
+# Visualização 2 {data-icon="fa-signal" data-navmenu="Análises"}
+
+## Column {.sidebar}
+
+Este Dashboard tem como intuito, apresentar alguns dados referentes ao tema de Energia e Painéis solares da cidade de Salvador e do estado da Bahia, utilizando a aplicação Rflexdashboard com o RShiny. <p>
+
+Feito por William Cardoso Sacramento <p>
+Graduando em Engenharia Química pela Universidade Federal da Bahia <p>
+
+**Fonte dos dados**: Empresa de Pesquisa Energética (EPE) e ANEEL
+
+
+## Column {data-width=600}
+
+### Gráfico do número de painéis instalados
+
+```{r}
+library(ggplot2)
+library(babynames)
+library(dplyr)
+library(plotly)
+
+renderPlotly(
+  ggplot(dados1, aes(x = Ano, y = Salvador))+
+    geom_bar(stat = 'identity', color = 'orange')+
+    ylab('Placas instaladas')
+)
+
+```
+
+### Gráfico do número de painéis instalados no estado
+```{r}
+library(ggplot2)
+library(babynames)
+library(dplyr)
+library(plotly)
+
+renderPlotly(
+  ggplot(dados1, aes(x = Ano, y = Bahia))+
+    geom_bar(stat = 'identity', color = 'orange')+
+    ylab('Placas instaladas')
+)
+```
+
+## Column {data-width=500}
+
+### Gráfico da quantidade instalada
+```{r}
+library(ggplot2)
+library(babynames)
+library(dplyr)
+library(plotly)
+
+renderPlotly(
+  ggplot(dados1, aes(x = Ano, y = Quantidade_kW))+
+    geom_line(color = 'orange')+
+    geom_point()+
+    ylab('Quantidade instalada (kW)')
+)
+```
+
+
+# Tabelas {data-icon="fa-table" data-navmenu="Análises"}
+
+## Column {.sidebar}
+
+Este Dashboard tem como intuito, apresentar alguns dados referentes ao tema de Energia e Painéis solares da cidade de Salvador e do estado da Bahia, utilizando a aplicação Rflexdashboard com o RShiny. <p>
+
+Feito por William Cardoso Sacramento <p>
+Graduando em Engenharia Química pela Universidade Federal da Bahia <p>
+
+**Fonte dos dados**: Empresa de Pesquisa Energética (EPE) e ANEEL
+
+
+## Column {data-width=500}
+
+```{r}
+
+dados
+
+dados1
+
+```
