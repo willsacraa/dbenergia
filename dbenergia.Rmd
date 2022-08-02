@@ -43,36 +43,44 @@ Graduando em Engenharia Química pela Universidade Federal da Bahia <p>
 ### Gráfico de Consumo de energia no estado
 
 ```{r}
-library(ggplot2)
 library(babynames)
 library(dplyr)
-library(plotly)
+library(echarts4r)
 
+dados$Ano <- as.character(dados$Ano)
 
-renderPlotly(
-  ggplot(dados, aes(x = Ano, y = Consumo_total))+
-    geom_line(color = 'green')+
-    geom_point()+
-    ylab('Consumo (GWh)')
-)
+dados |>
+  e_charts(x = Ano) |>
+  e_line(serie = Consumo_total)|>
+  e_tooltip() %>% 
+  e_color("#7B848FFF") %>%
+  e_toolbox_feature("dataZoom") %>%
+  e_toolbox_feature(feature = "reset") %>%
+  e_toolbox_feature("dataView") %>%
+  e_toolbox_feature("saveAsImage") %>% 
+  e_axis_labels(y = "Consumo (GWh)")|> 
+  e_grid(left = "15%")
 
 ```
 
 ### Gráfico do percentual do consumo
 ```{r}
-library(ggplot2)
 library(babynames)
 library(dplyr)
-library(plotly)
 
 dados_n <- dados[-1,]
 dados_n$Ano <- as.character(dados_n$Ano)
 
-renderPlotly(
-  ggplot(dados_n, aes(x = Ano, y = Perc_consumo))+
-    geom_bar(stat = 'identity', fill = 'yellow', color = 'black')+
-    ylab('Percentual de consumo')
-)
+dados_n |>
+  e_charts(x = Ano) |>
+  e_bar(serie = Perc_consumo)|>
+  e_tooltip() %>% 
+  e_color("#5FA2CEFF") %>%
+  e_toolbox_feature("dataZoom") %>%
+  e_toolbox_feature(feature = "reset") %>%
+  e_toolbox_feature("dataView") %>%
+  e_toolbox_feature("saveAsImage")
+
 
 ```
 
@@ -81,37 +89,47 @@ renderPlotly(
 ### Gráfico de consumidores do estado
 
 ```{r}
-library(ggplot2)
 library(babynames)
 library(dplyr)
-library(plotly)
 
-renderPlotly(
-  ggplot(dados, aes(x = Ano, y = Consumidores_total))+
-    geom_line(color = 'green')+
-    geom_point()+
-    ylab('Consumidores (milhares)')
-)
+dados$Ano <- as.character(dados$Ano)
+
+dados |>
+  e_charts(x = Ano) |>
+  e_line(serie = Consumidores_total)|>
+  e_tooltip() %>% 
+  e_color("#7B848FFF") %>%
+  e_toolbox_feature("dataZoom") %>%
+  e_toolbox_feature(feature = "reset") %>%
+  e_toolbox_feature("dataView") %>%
+  e_toolbox_feature("saveAsImage") %>% 
+  e_axis_labels(y = "Consumidores (milhares)")|> 
+  e_grid(left = "20%")
+
 
 ```
 
 
 ### Gráfico do percentual de consumidores
 ```{r}
-library(ggplot2)
 library(babynames)
 library(dplyr)
-library(plotly)
 
 
 dados_n <- dados[-1,]
 dados_n$Ano <- as.character(dados_n$Ano)
 
-renderPlotly(
-  ggplot(dados_n, aes(x = Ano, y = Perc_consumidores))+
-    geom_bar(stat = 'identity', fill = 'yellow', color = 'black')+
-    ylab('Percentual de consumidores')
-)
+dados_n |>
+  e_charts(x = Ano) |>
+  e_bar(serie = Perc_consumidores)|>
+  e_tooltip() %>% 
+  e_color("#5FA2CEFF") %>%
+  e_toolbox_feature("dataZoom") %>%
+  e_toolbox_feature(feature = "reset") %>%
+  e_toolbox_feature("dataView") %>%
+  e_toolbox_feature("saveAsImage") 
+
+
 ```
 
 
@@ -132,48 +150,70 @@ Graduando em Engenharia Química pela Universidade Federal da Bahia <p>
 ### Gráfico do número de painéis instalados
 
 ```{r}
-library(ggplot2)
 library(babynames)
 library(dplyr)
-library(plotly)
 
-renderPlotly(
-  ggplot(dados1, aes(x = Ano, y = Salvador))+
-    geom_bar(stat = 'identity', color = 'orange')+
-    ylab('Placas instaladas')
-)
+dados1$Ano <- as.character(dados1$Ano)
+
+dados1 |>
+  e_charts(x = Ano) |>
+  e_bar(serie = Salvador)|>
+  e_tooltip() %>% 
+  e_color("#5FA2CEFF") %>%
+  e_toolbox_feature("dataZoom") %>%
+  e_toolbox_feature(feature = "reset") %>%
+  e_toolbox_feature("dataView") %>%
+  e_toolbox_feature("saveAsImage") %>% 
+  e_axis_labels(y = "Placas instaladas")|> 
+  e_grid(left = "15%")
+
 
 ```
 
 ### Gráfico do número de painéis instalados no estado
 ```{r}
-library(ggplot2)
 library(babynames)
 library(dplyr)
-library(plotly)
 
-renderPlotly(
-  ggplot(dados1, aes(x = Ano, y = Bahia))+
-    geom_bar(stat = 'identity', color = 'orange')+
-    ylab('Placas instaladas')
-)
+dados1$Ano <- as.character(dados1$Ano)
+
+dados1 |>
+  e_charts(x = Ano) |>
+  e_bar(serie = Bahia)|>
+  e_tooltip() %>% 
+  e_color("#5FA2CEFF") %>%
+  e_toolbox_feature("dataZoom") %>%
+  e_toolbox_feature(feature = "reset") %>%
+  e_toolbox_feature("dataView") %>%
+  e_toolbox_feature("saveAsImage") %>% 
+  e_axis_labels(y = "Placas instaladas")|> 
+  e_grid(left = "15%")
+
+
 ```
 
 ## Column {data-width=500}
 
 ### Gráfico da quantidade instalada
 ```{r}
-library(ggplot2)
 library(babynames)
 library(dplyr)
-library(plotly)
 
-renderPlotly(
-  ggplot(dados1, aes(x = Ano, y = Quantidade_kW))+
-    geom_line(color = 'orange')+
-    geom_point()+
-    ylab('Quantidade instalada (kW)')
-)
+dados1$Ano <- as.character(dados1$Ano)
+#C85200FF
+dados1 |>
+  e_charts(x = Ano) |>
+  e_line(serie = Quantidade_kW)|>
+  e_tooltip() %>% 
+  e_color("#7B848FFF") %>%
+  e_toolbox_feature("dataZoom") %>%
+  e_toolbox_feature(feature = "reset") %>%
+  e_toolbox_feature("dataView") %>%
+  e_toolbox_feature("saveAsImage") %>% 
+  e_axis_labels(y = "Quantidade instalada (kW)")|> 
+  e_grid(left = "20%")  
+
+
 ```
 
 
