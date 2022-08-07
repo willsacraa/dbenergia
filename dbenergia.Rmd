@@ -24,6 +24,8 @@ library(readr)
 dados <- read_xlsx("data/energia.xlsx")
 dados1 <- read_xlsx("data/EnergiaCT.xlsx")
 dados2 <- read_xlsx("data/EnergiaCT2.xlsx")
+salvador <- read_delim("data/salvador.csv", 
+    delim = ";", escape_double = FALSE, trim_ws = TRUE)
 
 ```
 
